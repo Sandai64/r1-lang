@@ -1,12 +1,31 @@
-/* sdlang : langage de programmation interprété
- * memory-safe, programmation fonctionnelle, impérative & fortement typé
+/* SmokeScript : memory-safe & fast interpreted programming language
  * ------------------------------------------------------
- * Licence MIT, 2024 Erwan Egasse [Master Architecture des Logiciels]
+ * Please refer to the LICENSE file for more information
+ * about distribution and modification.
+ * [Master's thesis / Software Architecture & Language Theory]
  * ------------------------------------------------------
- * sdlang.exe : Lexer, parser & interprétation
- */
+*/
+
+// Disable this at one point
+#![allow(unused)]
+
+mod lexer;
+
+fn run(source: String) {}
+
+fn report(line: u32, error: &str, message: &str)
+{
+  println!("[line {}] Error {}: {}", line, error, message);
+}
+
+fn error(had_error_ref: &mut bool, line: u32, message: &str)
+{
+  report(line, "", message);
+  *had_error_ref = true;
+}
 
 fn main()
 {
+  let mut had_error: bool = false;
 
 }
