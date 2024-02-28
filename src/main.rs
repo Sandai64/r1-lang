@@ -6,6 +6,8 @@
 * ------------------------------------------------------
 */
 
+use std::time::{Duration, Instant};
+
 mod lexer;
 mod tests;
 
@@ -27,16 +29,18 @@ fn lex_simple() -> ()
         rt.block_on(fut).unwrap();
     }"#;
 
+    let start_time: Instant = Instant::now();
+
     let lexer: lexer::Lexer = lexer::Lexer::new(test_source);
     let tokens: Vec<lexer::Token> = lexer.lex();
-    println!("{:?}", tokens);
+
+    let time_diff: Duration = start_time.elapsed();
+    println!("Successfully lex()-ed source in {} microseconds ({} ms)", time_diff.as_micros(), time_diff.as_micros() as f64 / 1000.0);
+
+    println!("\nAnalyzed tokens -------------------\n{:?}", tokens);
 }
 
 fn main()
 {
-    println!("{} interpreter v{}", env!("CARGO_PKG_NAME"), env!("CARGO_PKG_VERSION"));
-    println!("Erwan EGASSE - Master's thesis on Software Architecture and Language Theory");
-    println!("\n-----------------\n");
-
     lex_simple();
 }
